@@ -78,9 +78,9 @@ const TrackOrder = () => {
             <div>
               <h3 className="font-semibold mb-4">Order Items</h3>
               <div className="space-y-3">
-                {searchedOrder.items.map((item) => (
+                {searchedOrder.items.filter(item => item?.product).map((item) => (
                   <div key={item.product.id} className="flex gap-3 p-3 border rounded-lg">
-                    <img src={item.product.images[0]} alt="" className="w-16 h-16 object-cover rounded" />
+                    <img src={item.product.images?.[0] || '/placeholder.png'} alt={item.product.name} className="w-16 h-16 object-cover rounded" />
                     <div><p className="font-medium">{item.product.name}</p><p className="text-sm text-muted-foreground">Size: {item.selectedSize} × {item.quantity}</p></div>
                   </div>
                 ))}

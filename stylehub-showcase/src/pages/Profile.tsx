@@ -141,12 +141,14 @@ const Profile = () => {
                             </div>
                             <div className="flex gap-2">
                               {order.items.slice(0, 3).map((item, idx) => (
-                                <img
-                                  key={idx}
-                                  src={item.product.images[0]}
-                                  alt=""
-                                  className="w-16 h-16 rounded object-cover"
-                                />
+                                item?.product?.images?.[0] && (
+                                  <img
+                                    key={idx}
+                                    src={item.product.images[0]}
+                                    alt={item.product.name || ''}
+                                    className="w-16 h-16 rounded object-cover"
+                                  />
+                                )
                               ))}
                               {order.items.length > 3 && (
                                 <div className="w-16 h-16 rounded bg-muted flex items-center justify-center text-sm font-medium">
