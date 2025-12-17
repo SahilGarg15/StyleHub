@@ -186,12 +186,27 @@ const ProductDetail = () => {
               averageRating={product.averageRating ?? product.rating ?? 0} 
               totalReviews={reviews.length ?? product.reviewCount ?? 0} 
               productId={product.id}
-              onReviewSubmit={(newReview) => {
-                const reviewWithId = { ...newReview, id: Date.now().toString() };
-                setReviews([reviewWithId, ...reviews]);
-                // Update product rating
-                const newAvgRating = ([...reviews, reviewWithId].reduce((sum, r) => sum + r.rating, 0)) / (reviews.length + 1);
-                setProduct({ ...product, averageRating: newAvgRating, reviewCount: reviews.length + 1 });
+              onReviewSubmit={async (newReview) => {
+                try {
+                  // Submit review to backend (backend only accepts rating and comment)
+                  await reviewService.create({
+                    productId: product.id,
+                    rating: newReview.rating,
+                    comment: newReview.comment
+                  });
+                  
+                  // Refetch the product to get updated reviews and ratings
+                  const updatedProduct = await productService.getById(product.id);
+                  setProduct(updatedProduct);
+                  setReviews(updatedProduct.reviews || []);
+                } catch (error) {
+                  console.error('Failed to submit review:', error);
+                  // Add to local state as fallback
+                  const reviewWithId = { ...newReview, id: Date.now().toString() };
+                  setReviews([reviewWithId, ...reviews]);
+                  const newAvgRating = ([...reviews, reviewWithId].reduce((sum, r) => sum + r.rating, 0)) / (reviews.length + 1);
+                  setProduct({ ...product, averageRating: newAvgRating, reviewCount: reviews.length + 1 });
+                }
               }}
             />
           </TabsContent>

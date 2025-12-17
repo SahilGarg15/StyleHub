@@ -26,7 +26,6 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
   const [hoveredRating, setHoveredRating] = useState(0);
   const [reviewForm, setReviewForm] = useState({
     userName: '',
-    title: '',
     comment: '',
   });
 
@@ -51,7 +50,6 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
       userId: user?.id || 'guest',
       userName: user?.name || reviewForm.userName || 'Anonymous',
       rating,
-      title: reviewForm.title,
       comment: reviewForm.comment,
       date: new Date().toISOString(),
       helpful: 0,
@@ -68,7 +66,7 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
     });
 
     setIsDialogOpen(false);
-    setReviewForm({ userName: '', title: '', comment: '' });
+    setReviewForm({ userName: '', comment: '' });
     setRating(5);
   };
 
@@ -124,16 +122,6 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
                   />
                 </div>
               )}
-              <div>
-                <Label htmlFor="review-title">Review Title</Label>
-                <Input
-                  id="review-title"
-                  required
-                  value={reviewForm.title}
-                  onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}
-                  placeholder="Sum up your experience..."
-                />
-              </div>
               <div>
                 <Label htmlFor="review-comment">Your Review</Label>
                 <Textarea
@@ -228,8 +216,7 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
                   </span>
                 </div>
 
-                <h4 className="font-medium mt-3">{review.title}</h4>
-                <p className="text-muted-foreground mt-1">{review.comment}</p>
+                <p className="text-muted-foreground mt-3">{review.comment}</p>
 
                 <div className="flex items-center gap-4 mt-4">
                   <Button variant="ghost" size="sm" className="text-muted-foreground">
