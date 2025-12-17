@@ -84,8 +84,8 @@ export const createOrder = catchAsync(async (req: AuthRequest, res: Response, ne
         trackingId,
         userId: req.user?.userId, // Optional for API key orders
         status: 'PENDING',
-        paymentMethod: paymentMethod as 'COD' | 'CARD' | 'UPI' | 'WALLET',
-        paymentStatus: paymentMethod === 'COD' ? 'PENDING' : 'PAID',
+        paymentMethod: (paymentMethod.toUpperCase()) as 'COD' | 'CARD' | 'UPI' | 'WALLET',
+        paymentStatus: paymentMethod.toUpperCase() === 'COD' ? 'PENDING' : 'PAID',
         subtotal,
         shipping,
         tax,
