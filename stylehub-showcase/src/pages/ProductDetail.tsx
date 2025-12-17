@@ -13,6 +13,7 @@ import { useCartContext, useWishlistContext, useRecentlyViewedContext } from '@/
 import { cn } from '@/lib/utils';
 import { Product } from '@/types';
 import { productService, reviewService } from '@/lib/apiServices';
+import { toast } from '@/hooks/use-toast';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -36,6 +37,8 @@ const ProductDetail = () => {
       setIsLoading(true);
       try {
         const productData = await productService.getById(id);
+        console.log('🔍 Initial product fetch:', productData);
+        console.log('🔍 Reviews from initial fetch:', productData.reviews);
 
         setProduct(productData);
         setReviews(productData.reviews || []);
@@ -207,9 +210,23 @@ const ProductDetail = () => {
                   
                   setProduct(updatedProduct);
                   setReviews(updatedProduct.reviews || []);
+                  
+                  // Show success toast
+                  toast({
+                    title: 'Review submitted!',
+                    description: 'Your review has been saved successfully.',
+                  });
                 } catch (error: any) {
                   console.error('❌ Failed to submit review:', error);
                   console.error('Error details:', error.response?.data || error.message);
+                  
+                  // Show error toast
+                  toast({
+                    title: 'Failed to submit review',
+                    description: error.response?.data?.message || 'Please try again later.',
+                    variant: 'destructive'
+                  });
+                  
                   // Add to local state as fallback
                   const reviewWithId = { ...newReview, id: Date.now().toString() };
                   setReviews([reviewWithId, ...reviews]);
