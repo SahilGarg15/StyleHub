@@ -4,10 +4,6 @@
 
 StyleHub is a modern, production-ready e-commerce application featuring user authentication, product catalog management, shopping cart, order processing with unique tracking IDs, product reviews, and an admin dashboard. Built with TypeScript, it includes 39 pre-seeded products across fashion categories with real product images and reviews.
 
-## 📸 Screenshots
-
-![StyleHub Banner](./stylehub-showcase/public/fashion-clothing-store-hero-banner.png)
-
 ## ✨ Key Features
 
 ### For Customers
