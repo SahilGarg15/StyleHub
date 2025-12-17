@@ -13,6 +13,7 @@ import productRoutes from '../src/routes/productRoutes'
 import orderRoutes from '../src/routes/orderRoutes'
 import reviewRoutes from '../src/routes/reviewRoutes'
 import userRoutes from '../src/routes/userRoutes'
+import apiRoutes from '../src/routes/apiRoutes'
 
 // Import middleware
 import { errorHandler, notFound } from '../src/middleware/errorHandler'
@@ -60,6 +61,9 @@ app.use('/api/products', productRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/reviews', reviewRoutes)
 app.use('/api/users', userRoutes)
+
+// External API routes (requires API key)
+app.use('/api/external', apiRoutes)
 
 // 404 handler
 app.use(notFound)
