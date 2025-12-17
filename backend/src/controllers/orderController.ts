@@ -4,6 +4,35 @@ import { AuthRequest } from '../middleware/auth'
 import { AppError, catchAsync } from '../utils/errors'
 import { generateOrderNumber, generateTrackingId } from '../utils/generators'
 
+// Helper function to transform product data
+const transformProduct = (product: any) => {
+  if (!product) return product
+  return {
+    ...product,
+    images: typeof product.images === 'string' 
+      ? (product.images.startsWith('[') ? JSON.parse(product.images) : [product.images])
+      : product.images,
+    sizes: typeof product.sizes === 'string' 
+      ? (product.sizes.startsWith('[') ? JSON.parse(product.sizes) : product.sizes.split(',').map((s: string) => s.trim()))
+      : product.sizes,
+    colors: typeof product.colors === 'string' 
+      ? (product.colors.startsWith('[') ? JSON.parse(product.colors) : product.colors.split(',').map((s: string) => s.trim()))
+      : product.colors
+  }
+}
+
+// Helper function to transform order with items
+const transformOrder = (order: any) => {
+  if (!order) return order
+  return {
+    ...order,
+    items: order.items?.map((item: any) => ({
+      ...item,
+      product: transformProduct(item.product)
+    })) || []
+  }
+}
+
 export const createOrder = catchAsync(async (req: AuthRequest, res: Response, next: NextFunction) => {
   console.log('Order request body:', JSON.stringify(req.body, null, 2));
   
@@ -133,7 +162,7 @@ export const createOrder = catchAsync(async (req: AuthRequest, res: Response, ne
 
     res.status(201).json({
       status: 'success',
-      order: completeOrder
+      order: transformOrder(completeOrder)
     })
   } catch (error) {
     console.error('Error creating order:', error);
@@ -159,10 +188,13 @@ export const getUserOrders = catchAsync(async (req: AuthRequest, res: Response, 
     orderBy: { createdAt: 'desc' }
   })
 
+  // Transform orders to parse JSON strings
+  const transformedOrders = orders.map(transformOrder)
+
   res.json({
     status: 'success',
-    results: orders.length,
-    orders
+    results: transformedOrders.length,
+    orders: transformedOrders
   })
 })
 
@@ -189,7 +221,7 @@ export const updateOrderStatus = catchAsync(async (req: AuthRequest, res: Respon
 
   res.json({
     status: 'success',
-    order
+    order: transformOrder(order)
   })
 })
 
@@ -256,7 +288,7 @@ export const getOrderByNumber = catchAsync(async (req: AuthRequest, res: Respons
 
   res.json({
     status: 'success',
-    order
+    order: transformOrder(order)
   })
 })
 
