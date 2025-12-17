@@ -213,7 +213,7 @@ const ProductDetail = () => {
                   
                   // Show success toast
                   toast({
-                    title: 'Review submitted!',
+                    title: 'Review saved!',
                     description: 'Your review has been saved successfully.',
                   });
                 } catch (error: any) {

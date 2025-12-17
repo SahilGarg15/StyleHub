@@ -15,7 +15,7 @@ export const createReview = catchAsync(async (req: AuthRequest, res: Response, n
     return next(new AppError('Product not found', 404))
   }
 
-  // For authenticated users, check if already reviewed
+  // For authenticated users, check if already reviewed and update if exists
   if (req.user) {
     const existingReview = await prisma.review.findUnique({
       where: {
@@ -23,11 +23,40 @@ export const createReview = catchAsync(async (req: AuthRequest, res: Response, n
           userId: req.user.userId,
           productId
         }
+      },
+      include: {
+        user: {
+          select: { id: true, name: true }
+        }
       }
     })
 
     if (existingReview) {
-      return next(new AppError('You have already reviewed this product', 400))
+      // Update existing review instead of creating new one
+      const updatedReview = await prisma.review.update({
+        where: { id: existingReview.id },
+        data: { rating, comment },
+        include: {
+          user: {
+            select: { id: true, name: true }
+          }
+        }
+      })
+
+      return res.status(200).json({
+        status: 'success',
+        review: {
+          id: updatedReview.id,
+          productId: updatedReview.productId,
+          userId: updatedReview.userId,
+          userName: updatedReview.user?.name || 'Anonymous',
+          rating: updatedReview.rating,
+          comment: updatedReview.comment || '',
+          date: updatedReview.createdAt.toISOString(),
+          helpful: 0,
+          verified: updatedReview.isVerified
+        }
+      })
     }
   }
 
