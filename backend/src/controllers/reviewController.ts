@@ -1,9 +1,7 @@
 import { Response, NextFunction } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../utils/db'
 import { AuthRequest } from '../middleware/auth'
 import { AppError, catchAsync } from '../utils/errors'
-
-const prisma = new PrismaClient()
 
 export const createReview = catchAsync(async (req: AuthRequest, res: Response, next: NextFunction) => {
   const { productId, rating, comment } = req.body

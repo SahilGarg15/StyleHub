@@ -1,10 +1,8 @@
 import { Response, NextFunction } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../utils/db'
 import { AuthRequest } from '../middleware/auth'
 import { AppError, catchAsync } from '../utils/errors'
 import { generateOrderNumber, generateTrackingId } from '../utils/generators'
-
-const prisma = new PrismaClient()
 
 export const createOrder = catchAsync(async (req: AuthRequest, res: Response, next: NextFunction) => {
   console.log('Order request body:', JSON.stringify(req.body, null, 2));

@@ -1,12 +1,10 @@
 import { Response, NextFunction } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../utils/db'
 import bcrypt from 'bcryptjs'
 import { AuthRequest } from '../middleware/auth'
 import { AppError, catchAsync } from '../utils/errors'
 import { generateToken } from '../utils/jwt'
 import { generateOTP } from '../utils/generators'
-
-const prisma = new PrismaClient()
 
 export const register = catchAsync(async (req: AuthRequest, res: Response, next: NextFunction) => {
   const { email, password, name, phone } = req.body

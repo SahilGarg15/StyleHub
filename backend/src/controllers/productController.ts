@@ -1,8 +1,6 @@
 import { Response, Request } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../utils/db'
 import { AppError, catchAsync } from '../utils/errors'
-
-const prisma = new PrismaClient()
 
 export const getAllProducts = catchAsync(async (req: Request, res: Response) => {
   const {
