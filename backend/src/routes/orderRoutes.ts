@@ -7,7 +7,6 @@ const router = Router()
 
 router.post(
   '/',
-  protect,
   [
     body('items').isArray({ min: 1 }).withMessage('Order must contain at least one item'),
     body('shippingAddress').notEmpty().withMessage('Shipping address is required'),
