@@ -36,10 +36,6 @@ const transformOrder = (order: any) => {
 export const createOrder = catchAsync(async (req: AuthRequest, res: Response, next: NextFunction) => {
   console.log('Order request body:', JSON.stringify(req.body, null, 2));
   
-  if (!req.user) {
-    return next(new AppError('User not authenticated', 401))
-  }
-  
   const {
     items,
     shippingAddress,
@@ -86,7 +82,7 @@ export const createOrder = catchAsync(async (req: AuthRequest, res: Response, ne
       data: {
         orderNumber,
         trackingId,
-        userId: req.user.userId,
+        userId: req.user?.userId, // Optional for API key orders
         status: 'PENDING',
         paymentMethod: paymentMethod as 'COD' | 'CARD' | 'UPI' | 'WALLET',
         paymentStatus: paymentMethod === 'COD' ? 'PENDING' : 'PAID',
