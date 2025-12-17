@@ -9,10 +9,11 @@ import { orderService } from '@/lib/apiServices';
 import { cn } from '@/lib/utils';
 
 const statusSteps = [
-  { status: 'confirmed', label: 'Confirmed', icon: CheckCircle },
-  { status: 'processing', label: 'Processing', icon: Package },
-  { status: 'shipped', label: 'Shipped', icon: Truck },
-  { status: 'delivered', label: 'Delivered', icon: CheckCircle },
+  { status: 'PENDING', label: 'Pending', icon: Clock },
+  { status: 'CONFIRMED', label: 'Confirmed', icon: CheckCircle },
+  { status: 'PROCESSING', label: 'Processing', icon: Package },
+  { status: 'SHIPPED', label: 'Shipped', icon: Truck },
+  { status: 'DELIVERED', label: 'Delivered', icon: CheckCircle },
 ];
 
 const TrackOrder = () => {
@@ -91,10 +92,10 @@ const TrackOrder = () => {
             disabled={isLoading}
           />
           <Button type="submit" disabled={isLoading}>
-            <Search className="h-4 w-4 mr-2" />Number</p><p className="font-semibold">{searchedOrder.orderNumber || searchedOrder.id}</p></div>
-                <div><p className="text-sm text-muted-foreground">Status</p><p className="font-semibold capitalize">{searchedOrder.status?.toLowerCase()}</p></div>
-                <div><p className="text-sm text-muted-foreground">Order Date</p><p className="font-semibold">{new Date(searchedOrder.createdAt).toLocaleDateString()}</p></div>
-                <div><p className="text-sm text-muted-foreground">Total Amount</p><p className="font-semibold">${searchedOrder.total
+            <Search className="h-4 w-4 mr-2" />
+            {isLoading ? 'Searching...' : 'Track'}
+          </Button>
+        </form>
 
         {error && (
           <div className="text-center py-8 text-muted-foreground">
@@ -107,10 +108,22 @@ const TrackOrder = () => {
           <div className="space-y-8">
             <div className="bg-muted/50 rounded-xl p-6">
               <div className="grid sm:grid-cols-2 gap-4">
-                <div><p className="text-sm text-muted-foreground">Order ID</p><p className="font-semibold">{searchedOrder.id}</p></div>
-                <div><p className="text-sm text-muted-foreground">Tracking ID</p><p className="font-semibold">{searchedOrder.trackingId}</p></div>
-                <div><p className="text-sm text-muted-foreground">Order Date</p><p className="font-semibold">{new Date(searchedOrder.createdAt).toLocaleDateString()}</p></div>
-                <div><p className="text-sm text-muted-foreground">Est. Delivery</p><p className="font-semibold">{new Date(searchedOrder.estimatedDelivery).toLocaleDateString()}</p></div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Order Number</p>
+                  <p className="font-semibold">{searchedOrder.orderNumber || searchedOrder.id}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Status</p>
+                  <p className="font-semibold capitalize">{searchedOrder.status?.toLowerCase()}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Order Date</p>
+                  <p className="font-semibold">{new Date(searchedOrder.createdAt).toLocaleDateString()}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Total Amount</p>
+                  <p className="font-semibold">${searchedOrder.total?.toFixed(2)}</p>
+                </div>
               </div>
             </div>
 
@@ -136,10 +149,20 @@ const TrackOrder = () => {
             <div>
               <h3 className="font-semibold mb-4">Order Items</h3>
               <div className="space-y-3">
-                {searchedOrder.items.filter(item => item?.product).map((item) => (
-                  <div key={item.product.id} className="flex gap-3 p-3 border rounded-lg">
-                    <img src={item.product.images?.[0] || '/placeholder.png'} alt={item.product.name} className="w-16 h-16 object-cover rounded" />
-                    <div><p className="font-medium">{item.product.name}</p><p className="text-sm text-muted-foreground">Size: {item.selectedSize} × {item.quantity}</p></div>
+                {searchedOrder.items?.filter(item => item?.product).map((item) => (
+                  <div key={item.id} className="flex gap-3 p-3 border rounded-lg">
+                    <img 
+                      src={item.product.image || item.product.images?.[0] || '/placeholder.png'} 
+                      alt={item.product.name} 
+                      className="w-16 h-16 object-cover rounded" 
+                    />
+                    <div className="flex-1">
+                      <p className="font-medium">{item.product.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.size && `Size: ${item.size} • `}Qty: {item.quantity}
+                      </p>
+                      <p className="text-sm font-semibold mt-1">${item.price?.toFixed(2)}</p>
+                    </div>
                   </div>
                 ))}
               </div>
