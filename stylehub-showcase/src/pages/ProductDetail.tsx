@@ -188,19 +188,28 @@ const ProductDetail = () => {
               productId={product.id}
               onReviewSubmit={async (newReview) => {
                 try {
+                  console.log('📝 Submitting review:', { productId: product.id, rating: newReview.rating, comment: newReview.comment });
+                  
                   // Submit review to backend (backend only accepts rating and comment)
-                  await reviewService.create({
+                  const createdReview = await reviewService.create({
                     productId: product.id,
                     rating: newReview.rating,
                     comment: newReview.comment
                   });
                   
+                  console.log('✅ Review created:', createdReview);
+                  
                   // Refetch the product to get updated reviews and ratings
+                  console.log('🔄 Refetching product data...');
                   const updatedProduct = await productService.getById(product.id);
+                  console.log('📦 Updated product:', updatedProduct);
+                  console.log('📊 Updated reviews count:', updatedProduct.reviews?.length);
+                  
                   setProduct(updatedProduct);
                   setReviews(updatedProduct.reviews || []);
-                } catch (error) {
-                  console.error('Failed to submit review:', error);
+                } catch (error: any) {
+                  console.error('❌ Failed to submit review:', error);
+                  console.error('Error details:', error.response?.data || error.message);
                   // Add to local state as fallback
                   const reviewWithId = { ...newReview, id: Date.now().toString() };
                   setReviews([reviewWithId, ...reviews]);

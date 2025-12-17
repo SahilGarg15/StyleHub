@@ -63,7 +63,17 @@ export const createReview = catchAsync(async (req: AuthRequest, res: Response, n
 
   res.status(201).json({
     status: 'success',
-    review
+    review: {
+      id: review.id,
+      productId: review.productId,
+      userId: review.userId,
+      userName: review.user?.name || 'Anonymous',
+      rating: review.rating,
+      comment: review.comment || '',
+      date: review.createdAt.toISOString(),
+      helpful: 0,
+      verified: review.isVerified
+    }
   })
 })
 

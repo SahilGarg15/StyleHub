@@ -107,6 +107,17 @@ export const getProduct = catchAsync(async (req: Request, res: Response) => {
       ...product,
       reviewCount,
       averageRating: parseFloat(averageRating.toFixed(1)),
+      reviews: product.reviews.map((review: any) => ({
+        id: review.id,
+        productId: review.productId,
+        userId: review.userId,
+        userName: review.user?.name || 'Anonymous',
+        rating: review.rating,
+        comment: review.comment || '',
+        date: review.createdAt.toISOString(),
+        helpful: 0,
+        verified: review.isVerified
+      })),
       images: typeof product.images === 'string' ? (product.images.startsWith('[') ? JSON.parse(product.images) : product.images.split(',').map((s: string) => s.trim())) : product.images,
       sizes: typeof product.sizes === 'string' ? (product.sizes.startsWith('[') ? JSON.parse(product.sizes) : product.sizes.split(',').map((s: string) => s.trim())) : product.sizes,
       colors: typeof product.colors === 'string' ? (product.colors.startsWith('[') ? JSON.parse(product.colors) : product.colors.split(',').map((s: string) => s.trim())) : product.colors

@@ -38,7 +38,7 @@ export interface Review {
   userId: string;
   userName: string;
   rating: number;
-  title: string;
+  title?: string;
   comment: string;
   date: string;
   helpful: number;
