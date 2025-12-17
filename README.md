@@ -1,50 +1,70 @@
-# StyleHub - Full-Stack E-Commerce Platform
+# 🛍️ StyleHub - Full-Stack E-Commerce Platform
 
-A modern, full-featured e-commerce platform built with React, TypeScript, Node.js, Express, Prisma, and PostgreSQL. Features include user authentication, product management, shopping cart, order tracking, reviews, and an admin dashboard.
+> A complete Indian fashion e-commerce platform with React frontend and Node.js backend
+
+StyleHub is a modern, production-ready e-commerce application featuring user authentication, product catalog management, shopping cart, order processing with unique tracking IDs, product reviews, and an admin dashboard. Built with TypeScript, it includes 39 pre-seeded products across fashion categories with real product images and reviews.
+
+## 📸 Screenshots
 
 ![StyleHub Banner](./stylehub-showcase/public/fashion-clothing-store-hero-banner.png)
 
-## 🚀 Features
+## ✨ Key Features
 
-### Customer Features
-- **User Authentication**: Secure JWT-based authentication with email/password
-- **Product Browsing**: Browse products by categories (Men, Women, Kids, Accessories)
-- **Advanced Filtering**: Filter by price range, size, brand, and sort options
-- **Product Reviews**: View and submit product reviews with ratings
-- **Shopping Cart**: Add, update, and remove items from cart
-- **Wishlist**: Save favorite products for later
-- **Order Management**: Place orders with COD payment option
-- **Order Tracking**: Track orders with unique tracking IDs
-- **Profile Management**: Update personal information and addresses
-- **Recently Viewed**: Keep track of recently viewed products
+### For Customers
+- 🔐 **Secure Authentication** - JWT-based login/signup with bcrypt password hashing
+- 🛍️ **Product Catalog** - 39 products across Men, Women, Kids & Accessories categories
+- 🔍 **Advanced Filters** - Search by category, price (₹100-₹10,000), size, and brand
+- ⭐ **Reviews & Ratings** - 5-star rating system with 195+ pre-seeded reviews
+- 🛒 **Shopping Cart** - Add/remove items with real-time price calculation including GST
+- ❤️ **Wishlist** - Save favorite products
+- 📦 **Order Management** - Place orders with Cash on Delivery option
+- 🔍 **Order Tracking** - Track orders using Order ID, Tracking ID, or Order Number
+- 👤 **Profile Management** - Update profile, manage multiple shipping addresses
+- 📱 **Fully Responsive** - Works on mobile, tablet, and desktop
 
-### Admin Features
-- **Order Management**: View and update order statuses
-- **Product Statistics**: View total products and categories
-- **Customer Overview**: Monitor registered users
-- **Order Overview**: Track pending, processing, and completed orders
+### For Admins
+- 📊 **Admin Dashboard** - Overview of orders, products, and customers
+- 📝 **Order Management** - View all orders and update status (Pending → Processing → Shipped → Delivered)
+- 📈 **Analytics** - Product count, category breakdown, user statistics
 
-### Technical Features
-- **Full-Stack TypeScript**: End-to-end type safety
-- **RESTful API**: Well-structured backend API with Express
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: JWT tokens with 7-day expiry
-- **Responsive Design**: Mobile-first design with Tailwind CSS
-- **Modern UI**: shadcn/ui components with Radix UI primitives
-- **State Management**: React Context API for global state
-- **Form Validation**: Comprehensive validation on frontend and backend
-- **Error Handling**: Global error handling with custom error classes
-- **Internationalization**: Indian localization (INR currency, GST)
+## 🛠️ Tech Stack
+
+### Frontend (`stylehub-showcase/`)
+- **React 18** with **TypeScript** - Type-safe component development
+- **Vite** - Lightning-fast build tool and dev server
+- **Tailwind CSS** - Utility-first styling
+- **shadcn/ui** - High-quality accessible components (40+ components)
+- **React Router** - Client-side routing
+- **Axios** - HTTP client with interceptors
+- **Context API** - Global state management (auth, cart, orders, wishlist)
+- **Lucide React** - Beautiful icon library
+
+### Backend (`backend/`)
+- **Node.js 18+** with **TypeScript**
+- **Express 4.21** - Web framework
+- **Prisma 5.22** - Type-safe ORM with PostgreSQL
+- **JWT** - Token-based authentication (7-day expiry)
+- **bcryptjs** - Password hashing
+- **express-validator** - Request validation
+- **CORS** - Cross-origin resource sharing
+
+### Database
+- **PostgreSQL** - Primary database
+- **Prisma ORM** - Type-safe database access
+- **11 Models** - User, Product, Order, OrderItem, OrderTracking, TrackingStep, Review, Address, OTPCode
+- **Migrations** - Version-controlled schema changes
 
 ## 📋 Prerequisites
 
-- Node.js 18+ and npm/bun
-- PostgreSQL database (or Neon serverless PostgreSQL)
-- Git
+Before you begin, ensure you have:
+- **Node.js** 18.x or higher ([Download](https://nodejs.org/))
+- **PostgreSQL** 14+ ([Download](https://www.postgresql.org/download/))
+- **npm** or **bun** package manager
+- **Git** for version control
 
-## 🛠️ Installation
+## 🚀 Quick Start
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/SahilGarg15/StyleHub.git
@@ -55,257 +75,424 @@ cd StyleHub
 
 ```bash
 cd backend
+
+# Install dependencies
 npm install
 
 # Create .env file
 cp .env.example .env
 ```
 
-Configure your `.env` file:
+**Edit `backend/.env` with your configuration:**
 
 ```env
 DATABASE_URL="postgresql://username:password@localhost:5432/stylehub"
-JWT_SECRET="your-super-secret-jwt-key"
+JWT_SECRET="your-super-secret-key-min-32-characters"
 JWT_EXPIRES_IN="7d"
 PORT=5000
 ```
 
-Run database migrations and seed data:
+**Initialize Database:**
 
 ```bash
+# Generate Prisma Client
+npx prisma generate
+
+# Run migrations to create tables
 npx prisma migrate dev
+
+# Seed database with products and users
 npx prisma db seed
-npx tsx prisma/seedReviews.ts  # Add product reviews
+
+# Seed reviews for all products
+npx tsx prisma/seedReviews.ts
 ```
 
-Start the backend server:
+**Start Backend Server:**
 
 ```bash
 npm run dev
 ```
 
-Backend will run on `http://localhost:5000`
+✅ Backend running at `http://localhost:5000`
 
 ### 3. Frontend Setup
 
+Open a **new terminal** window:
+
 ```bash
 cd stylehub-showcase
+
+# Install dependencies
 npm install
 
 # Create .env file
 cp .env.example .env
 ```
 
-Configure your `.env` file:
+**Edit `stylehub-showcase/.env`:**
 
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-Start the frontend development server:
+**Start Frontend Server:**
 
 ```bash
 npm run dev
 ```
 
-Frontend will run on `http://localhost:8080`
+✅ Frontend running at `http://localhost:8080`
+
+### 4. Test the Application
+
+Open your browser to `http://localhost:8080` and login with:
+
+**Admin User:**
+- UserName: `demo123`
+- Password: `demo12`
 
 ## 📁 Project Structure
 
 ```
 StyleHub/
-├── backend/                    # Node.js Express backend
-│   ├── prisma/
-│   │   ├── schema.prisma      # Database schema
-│   │   ├── seed.ts            # Seed products and users
-│   │   └── seedReviews.ts     # Seed product reviews
-│   ├── src/
-│   │   ├── controllers/       # Route controllers
-│   │   ├── middleware/        # Auth and error middleware
-│   │   ├── routes/            # API routes
-│   │   ├── utils/             # Helper functions
-│   │   └── index.ts           # Server entry point
-│   └── package.json
+├── README.md                           # This file
+├── .gitignore                          # Git ignore rules
 │
-└── stylehub-showcase/         # React TypeScript frontend
-    ├── public/                # Static assets and product images
-    ├── src/
-    │   ├── components/        # Reusable UI components
-    │   │   ├── layout/        # Layout components (Header, Footer)
-    │   │   ├── product/       # Product-related components
-    │   │   └── ui/            # shadcn/ui components
-    │   ├── contexts/          # React Context providers
-    │   ├── hooks/             # Custom React hooks
-    │   ├── lib/               # Utilities and API services
-    │   ├── pages/             # Page components
-    │   ├── types/             # TypeScript type definitions
-    │   └── App.tsx            # Main app component
-    └── package.json
-
+├── backend/                            # Express + Prisma backend
+│   ├── .env.example                    # Environment template
+│   ├── package.json                    # Backend dependencies
+│   ├── tsconfig.json                   # TypeScript config
+│   │
+│   ├── prisma/
+│   │   ├── schema.prisma               # Database schema (11 models)
+│   │   ├── seed.ts                     # Seeds 39 products + 2 users
+│   │   ├── seedReviews.ts              # Seeds 5-8 reviews per product
+│   │   └── migrations/                 # Database migrations
+│   │
+│   └── src/
+│       ├── server.ts                   # Express server entry
+│       ├── controllers/                # Route handlers
+│       │   ├── authController.ts       # Authentication logic
+│       │   ├── productController.ts    # Product CRUD
+│       │   ├── orderController.ts      # Order management
+│       │   ├── reviewController.ts     # Review management
+│       │   └── userController.ts       # User profile & favorites
+│       ├── middleware/
+│       │   ├── auth.ts                 # JWT verification
+│       │   └── errorHandler.ts         # Global error handling
+│       ├── routes/                     # API route definitions
+│       └── utils/                      # Helpers (JWT, generators, errors)
+│
+└── stylehub-showcase/                  # React + Vite frontend
+    ├── .env.example                    # Frontend environment template
+    ├── package.json                    # Frontend dependencies
+    ├── vite.config.ts                  # Vite configuration
+    ├── tailwind.config.ts              # Tailwind CSS config
+    │
+    ├── public/                         # Static assets (100+ product images)
+    │
+    └── src/
+        ├── main.tsx                    # React entry point
+        ├── App.tsx                     # Root component + routing
+        │
+        ├── components/
+        │   ├── layout/                 # Header, Footer, Layout
+        │   ├── product/                # Product cards, filters, reviews
+        │   └── ui/                     # shadcn/ui components (40+)
+        │
+        ├── pages/                      # Page components
+        │   ├── Index.tsx               # Homepage
+        │   ├── Shop.tsx                # Product listing
+        │   ├── ProductDetail.tsx       # Product details
+        │   ├── Cart.tsx                # Shopping cart
+        │   ├── Checkout.tsx            # Checkout flow
+        │   ├── OrderConfirmation.tsx   # Order success
+        │   ├── TrackOrder.tsx          # Order tracking
+        │   ├── Profile.tsx             # User profile
+        │   ├── Wishlist.tsx            # Saved items
+        │   ├── Auth.tsx                # Login/Register
+        │   ├── AdminDashboard.tsx      # Admin panel
+        │   ├── About.tsx               # About page
+        │   ├── Contact.tsx             # Contact page
+        │   └── NotFound.tsx            # 404 page
+        │
+        ├── contexts/
+        │   └── AppContext.tsx          # Global state (auth, cart, orders, wishlist)
+        │
+        ├── hooks/                      # Custom React hooks
+        │   ├── useAuth.ts              # Authentication hook
+        │   ├── useCart.ts              # Cart management
+        │   ├── useOrders.ts            # Order management
+        │   └── useWishlist.ts          # Wishlist management
+        │
+        ├── lib/
+        │   ├── api.ts                  # Axios instance with interceptors
+        │   ├── apiServices.ts          # API service functions
+        │   └── utils.ts                # Helper utilities
+        │
+        └── types/
+            └── index.ts                # TypeScript type definitions
 ```
 
-## 🔑 API Endpoints
+## 🔌 API Endpoints
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user
+### Authentication (`/api/auth`)
+```
+POST   /register        Register new user
+POST   /login           Login (returns JWT token)
+GET    /me              Get authenticated user (requires token)
+```
 
-### Products
-- `GET /api/products` - Get all products (with filters)
-- `GET /api/products/:id` - Get product by ID
+### Products (`/api/products`)
+```
+GET    /                Get all products (supports filters)
+GET    /:id             Get product by ID (includes reviews)
+```
 
-### Orders
-- `POST /api/orders` - Create new order (protected)
-- `GET /api/orders` - Get user orders (protected)
-- `GET /api/orders/:id` - Get order by ID
-- `PATCH /api/orders/:id/status` - Update order status (protected)
-- `GET /api/orders/:id/track` - Track order
+**Query Parameters:**
+- `category` - Filter by category (Men, Women, Kids, Accessories)
+- `subcategory` - Filter by subcategory
+- `minPrice`, `maxPrice` - Price range filter
+- `size` - Filter by size
+- `brand` - Filter by brand
+- `sort` - Sort by (price_asc, price_desc, popular, newest)
 
-### Users
-- `GET /api/users/favorites` - Get user favorites (protected)
-- `POST /api/users/favorites/:productId` - Add to favorites (protected)
-- `DELETE /api/users/favorites/:productId` - Remove from favorites (protected)
+### Orders (`/api/orders`)
+```
+POST   /                Create new order (requires auth)
+GET    /                Get user's orders (requires auth)
+GET    /:id             Get order details
+PATCH  /:id/status      Update order status (requires auth)
+GET    /:id/track       Track order by ID/trackingId/orderNumber
+GET    /number/:num     Get order by order number
+```
 
-## 🎨 Tech Stack
+### Users (`/api/users`)
+```
+GET    /favorites            Get favorited products (requires auth)
+POST   /favorites/:id        Add product to favorites (requires auth)
+DELETE /favorites/:id        Remove from favorites (requires auth)
+```
 
-### Frontend
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Tailwind CSS** - Utility-first CSS
-- **shadcn/ui** - Component library
-- **React Router** - Client-side routing
-- **Axios** - HTTP client
-- **React Query** - Server state management
-- **Lucide React** - Icons
+### Reviews (`/api/reviews`)
+```
+GET    /product/:id          Get reviews for product
+POST   /                     Create review (requires auth)
+```
 
-### Backend
-- **Node.js** - Runtime
-- **Express** - Web framework
-- **TypeScript** - Type safety
-- **Prisma** - ORM
-- **PostgreSQL** - Database
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
-- **express-validator** - Input validation
-- **cors** - CORS handling
+**Authentication:** Protected routes require `Authorization: Bearer <token>` header
 
 ## 💾 Database Schema
 
-### Main Models
-- **User**: User accounts with authentication
-- **Product**: Product catalog with categories
-- **Order**: Customer orders with tracking
-- **OrderItem**: Individual items in orders
-- **OrderTracking**: Order status tracking
-- **TrackingStep**: Tracking timeline steps
-- **Review**: Product reviews and ratings
-- **Address**: User shipping addresses
-- **OTPCode**: Email verification codes
+The application uses **11 Prisma models**:
 
-## 🔐 Default Credentials
+| Model | Description | Key Fields |
+|-------|-------------|------------|
+| **User** | User accounts | email, password (hashed), name, phone, role |
+| **Product** | Product catalog | name, price, category, subcategory, sizes, images |
+| **Review** | Product reviews | rating (1-5), title, comment, userName |
+| **Order** | Customer orders | orderNumber, trackingId, status, total |
+| **OrderItem** | Items in order | productId, quantity, price, size |
+| **OrderTracking** | Order status | status, location, currentStep |
+| **TrackingStep** | Tracking events | step, description, timestamp |
+| **Address** | Shipping addresses | street, city, state, postalCode, country |
+| **OTPCode** | Verification codes | code, expiresAt |
 
-After seeding the database, you can use these credentials:
+**Relationships:**
+- User → Orders (one-to-many)
+- User → Reviews (one-to-many)
+- Product → Reviews (one-to-many)
+- Order → OrderItems (one-to-many)
+- Order → OrderTracking (one-to-one)
 
-**Admin Account:**
-- Email: `admin@stylehub.com`
-- Password: `admin123`
+**Seeded Data:**
+- ✅ 39 Products (Traditional & Western wear)
+- ✅ 195+ Reviews (5-8 per product)
+- ✅ 2 Users (admin + test user)
 
-**Test User:**
-- Email: `user@stylehub.com`
-- Password: `user123`
+## 🧪 Testing Checklist
 
-## 🚢 Deployment
+- [ ] **Register**: Create new account at `/auth`
+- [ ] **Login**: Login with `user@stylehub.com` / `user123`
+- [ ] **Browse**: Visit `/shop` and filter products
+- [ ] **Product**: Click product to view details and reviews
+- [ ] **Cart**: Add items to cart, adjust quantities
+- [ ] **Wishlist**: Toggle heart icon to save favorites
+- [ ] **Checkout**: Complete order with shipping details
+- [ ] **Track**: Copy tracking ID and track at `/track-order`
+- [ ] **Profile**: View order history and manage addresses
+- [ ] **Admin**: Login as admin and view dashboard at `/admin`
 
-### Backend Deployment (Railway/Render)
+## 🚢 Deployment Guide
 
-1. Create a new service and connect your GitHub repo
-2. Set environment variables:
-   - `DATABASE_URL`
-   - `JWT_SECRET`
-   - `JWT_EXPIRES_IN`
-   - `PORT`
-3. Build command: `cd backend && npm install && npx prisma generate && npx prisma migrate deploy`
-4. Start command: `cd backend && npm start`
+### Backend (Railway / Render / Heroku)
 
-### Frontend Deployment (Vercel/Netlify)
+1. **Create PostgreSQL database** (e.g., Neon, Railway)
 
-1. Create a new project and connect your GitHub repo
-2. Set build settings:
+2. **Deploy Backend:**
+   - Connect GitHub repository
+   - Set root directory: `backend`
+   - Build command: `npm install && npx prisma generate && npm run build`
+   - Start command: `npm start`
+
+3. **Environment Variables:**
+   ```
+   DATABASE_URL=postgresql://user:password@host:5432/dbname
+   JWT_SECRET=your-production-secret-min-32-chars
+   JWT_EXPIRES_IN=7d
+   PORT=5000
+   ```
+
+4. **Run Migrations:**
+   ```bash
+   npx prisma migrate deploy
+   npx prisma db seed
+   npx tsx prisma/seedReviews.ts
+   ```
+
+### Frontend (Vercel / Netlify)
+
+1. **Deploy Frontend:**
+   - Connect GitHub repository
    - Base directory: `stylehub-showcase`
    - Build command: `npm run build`
    - Output directory: `dist`
-3. Set environment variable:
-   - `VITE_API_URL`: Your deployed backend URL
+   - Node version: `18.x`
 
-## 📝 Environment Variables
-
-### Backend (.env)
-```env
-DATABASE_URL=           # PostgreSQL connection string
-JWT_SECRET=             # Secret key for JWT tokens
-JWT_EXPIRES_IN=7d       # Token expiration time
-PORT=5000               # Server port
-```
-
-### Frontend (.env)
-```env
-VITE_API_URL=           # Backend API URL (e.g., http://localhost:5000/api)
-```
-
-## 🧪 Testing
-
-### Test User Registration
-1. Go to `/auth` page
-2. Click "Sign Up"
-3. Fill in registration form
-4. Login with created credentials
-
-### Test Order Flow
-1. Browse products at `/shop`
-2. Add items to cart
-3. Go to `/cart`
-4. Proceed to checkout at `/checkout`
-5. Fill in shipping details
-6. Place order with COD
-7. View order confirmation
-8. Track order at `/track-order`
+2. **Environment Variable:**
+   ```
+   VITE_API_URL=https://your-backend.railway.app/api
+   ```
 
 ## 🐛 Troubleshooting
 
-### Backend won't start
-- Check PostgreSQL is running
-- Verify DATABASE_URL in .env
-- Run `npx prisma generate`
-- Check port 5000 is not in use
+### Backend Won't Start
 
-### Frontend won't start
-- Verify VITE_API_URL in .env
-- Check backend is running on correct port
-- Clear node_modules and reinstall
+```bash
+# Check PostgreSQL is running
+# Windows: services.msc → PostgreSQL
+# Mac: brew services list
 
-### Orders not showing
-- Ensure you're logged in
-- Check backend console for errors
-- Verify JWT token is being sent (check Network tab)
+# Regenerate Prisma Client
+cd backend
+npx prisma generate
 
-## 📄 License
+# Check port availability
+netstat -an | findstr :5000  # Windows
+lsof -i :5000                # Mac/Linux
+```
 
-This project is licensed under the MIT License.
+### Database Errors
+
+```bash
+cd backend
+
+# Reset database (WARNING: Deletes all data)
+npx prisma migrate reset
+
+# Re-run migrations
+npx prisma migrate deploy
+
+# Reseed data
+npx prisma db seed
+npx tsx prisma/seedReviews.ts
+```
+
+### Frontend Issues
+
+```bash
+cd stylehub-showcase
+
+# Check .env exists and has correct API URL
+cat .env
+
+# Verify backend is running
+curl http://localhost:5000/api/products
+
+# Clear cache and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Common Problems
+
+**Authentication not persisting:**
+- Check browser localStorage for `authToken` key
+- Verify JWT_SECRET is set in backend `.env`
+- Check browser console for auth errors
+
+**CORS errors:**
+- Ensure frontend URL is correct in backend CORS config
+- Check `VITE_API_URL` in frontend `.env`
+
+**Images not loading:**
+- Images are in `stylehub-showcase/public/` folder
+- Check vite.config.ts publicDir setting
+
+## 📝 Environment Variables Reference
+
+### Backend `.env`
+```env
+# Database connection (PostgreSQL)
+DATABASE_URL="postgresql://username:password@localhost:5432/stylehub"
+
+# JWT configuration
+JWT_SECRET="your-super-secret-key-minimum-32-characters-long"
+JWT_EXPIRES_IN="7d"
+
+# Server port
+PORT=5000
+```
+
+### Frontend `.env`
+```env
+# Backend API URL (include /api at the end)
+VITE_API_URL=http://localhost:5000/api
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
 
 ## 👨‍💻 Author
 
 **Sahil Garg**
 - GitHub: [@SahilGarg15](https://github.com/SahilGarg15)
+- LinkedIn: [Connect with me](https://www.linkedin.com/in/sahilgarg15/)
 
 ## 🙏 Acknowledgments
 
-- [shadcn/ui](https://ui.shadcn.com/) for beautiful UI components
-- [Prisma](https://www.prisma.io/) for the excellent ORM
-- [Tailwind CSS](https://tailwindcss.com/) for utility-first CSS
-- [Lucide](https://lucide.dev/) for icons
+- **shadcn/ui** - Beautiful and accessible UI components
+- **Prisma** - Next-generation ORM for Node.js
+- **Tailwind CSS** - Utility-first CSS framework
+- **Radix UI** - Unstyled, accessible components
+- **Lucide** - Beautiful icon library
+- **Neon** - Serverless PostgreSQL
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Troubleshooting](#-troubleshooting) section
+2. Open an issue on [GitHub Issues](https://github.com/SahilGarg15/StyleHub/issues)
+3. Contact: gargsahil156@gmail.com
 
 ---
 
-Made with ❤️ by Sahil Garg
+<div align="center">
+
+**Built with ❤️ using React, TypeScript, Node.js, and PostgreSQL**
+
+⭐ Star this repo if you find it helpful!
+
+[Report Bug](https://github.com/SahilGarg15/StyleHub/issues) · [Request Feature](https://github.com/SahilGarg15/StyleHub/issues)
+
+</div>
