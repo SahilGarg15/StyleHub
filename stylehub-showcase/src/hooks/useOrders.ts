@@ -8,7 +8,7 @@ export const useOrders = (user: User | null) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchOrders = useCallback(async () => {
-    if (!user) {
+    if (!user || !user.id) {
       console.log('No user found, clearing orders');
       setOrders([]);
       return;
