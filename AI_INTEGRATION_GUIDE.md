@@ -90,6 +90,8 @@ order = response.json()['order']
 print(f"Order created: {order['orderNumber']}")
 print(f"Total: ${order['total']}")
 print(f"Status: {order['status']}")
+print(f"\n🔗 Customer can track order at:")
+print(f"https://stylehub-showcase.vercel.app/track?id={order['orderNumber']}")
 ```
 
 ### 4. Track Order
@@ -105,6 +107,8 @@ response = requests.get(
 order = response.json()['order']
 print(f"Order Status: {order['status']}")
 print(f"Items: {len(order['items'])}")
+print(f"\n🔗 Share tracking link:")
+print(f"https://stylehub-showcase.vercel.app/track?id={order_number}")
 ```
 
 ---
@@ -198,11 +202,32 @@ curl -X POST "https://backend-xi-murex-46.vercel.app/api/external/orders" \
 2. Collect product ID, size, quantity
 3. Use POST `/orders` to place order
 4. Return order number and total to user
+5. **Provide tracking link**: `https://stylehub-showcase.vercel.app/track?id={orderNumber}`
 
 ### Task 4: Order Status
 1. Get order number from user
 2. Use GET `/orders/number/:orderNumber`
 3. Return status and tracking info
+4. **Customer can track without login** using the link above
+
+---
+
+## Order Database & Tracking
+
+✅ **All orders are automatically saved to the database**
+- Orders placed via API are immediately persisted
+- No authentication required for order tracking
+- Customers can track orders using: `https://stylehub-showcase.vercel.app/track?id=ORDER_NUMBER`
+
+**Example Tracking Flow:**
+```python
+# After placing order
+order = place_order(order_data)
+tracking_url = f"https://stylehub-showcase.vercel.app/track?id={order['orderNumber']}"
+
+# Share this URL with customer - they can track without logging in
+print(f"Track your order: {tracking_url}")
+```
 
 ---
 

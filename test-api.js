@@ -116,6 +116,8 @@ async function testPlaceOrder(product) {
     console.log(`  ${order.shippingAddress.name}`);
     console.log(`  ${order.shippingAddress.street}`);
     console.log(`  ${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zipCode}`);
+    console.log(`\n🔗 Track this order at:`);
+    console.log(`   https://stylehub-showcase.vercel.app/track?id=${order.orderNumber}`);
     
     return order;
   } catch (error) {
