@@ -6,6 +6,38 @@ All requirements have been successfully implemented and tested.
 
 ---
 
+## ✅ NEW: Guest Checkout (No Login Required)
+
+**Status:** ✅ Working
+
+Users can now **complete purchases without creating an account or logging in**.
+
+**What Works Without Login:**
+- ✅ Browse all products
+- ✅ Add items to cart
+- ✅ Complete checkout as guest
+- ✅ Place orders (saved to database)
+- ✅ Track orders using order number
+- ✅ View order details and status
+
+**Guest Order Test Results:**
+```
+✅ Order placed: ORD-MJ9PUIXS-24GXA
+✅ Customer: Guest (no account needed)
+✅ Order saved to database
+✅ Trackable without login
+```
+
+**Try Guest Checkout:**
+1. Go to https://stylehub-showcase.vercel.app
+2. Add items to cart (no login needed)
+3. Go to checkout
+4. Enter email and shipping details
+5. Place order as guest
+6. Track order using the provided link
+
+---
+
 ## ✅ Requirement 1: Orders Save to Database
 
 **Status:** ✅ Working
