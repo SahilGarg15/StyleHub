@@ -75,7 +75,7 @@ export const createOrder = catchAsync(async (req: AuthRequest, res: Response, ne
   const trackingId = generateTrackingId()
 
   try {
-    console.log('Creating order with data:', { orderNumber, trackingId, userId: req.user.userId, customerName, customerPhone });
+    console.log('Creating order with data:', { orderNumber, trackingId, userId: req.user?.userId, customerName, customerPhone });
     
     // Create order with tracking
     const order = await prisma.order.create({
