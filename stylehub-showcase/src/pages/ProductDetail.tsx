@@ -183,9 +183,16 @@ const ProductDetail = () => {
           <TabsContent value="reviews" className="mt-6">
             <ProductReviews 
               reviews={reviews} 
-              averageRating={product.rating ?? 0} 
-              totalReviews={product.reviewCount ?? 0} 
+              averageRating={product.averageRating ?? product.rating ?? 0} 
+              totalReviews={reviews.length ?? product.reviewCount ?? 0} 
               productId={product.id}
+              onReviewSubmit={(newReview) => {
+                const reviewWithId = { ...newReview, id: Date.now().toString() };
+                setReviews([reviewWithId, ...reviews]);
+                // Update product rating
+                const newAvgRating = ([...reviews, reviewWithId].reduce((sum, r) => sum + r.rating, 0)) / (reviews.length + 1);
+                setProduct({ ...product, averageRating: newAvgRating, reviewCount: reviews.length + 1 });
+              }}
             />
           </TabsContent>
           <TabsContent value="details" className="mt-6">

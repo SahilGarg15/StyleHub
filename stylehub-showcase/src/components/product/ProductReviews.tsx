@@ -224,7 +224,7 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
                     </div>
                   </div>
                   <span className="text-sm text-muted-foreground">
-                    {new Date(review.date).toLocaleDateString()}
+                    {review.date ? new Date(review.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Recently'}
                   </span>
                 </div>
 
@@ -234,7 +234,7 @@ export const ProductReviews = ({ reviews, averageRating, totalReviews, productId
                 <div className="flex items-center gap-4 mt-4">
                   <Button variant="ghost" size="sm" className="text-muted-foreground">
                     <ThumbsUp className="h-4 w-4 mr-1" />
-                    Helpful ({review.helpful})
+                    Helpful ({review.helpful || 0})
                   </Button>
                 </div>
               </div>
