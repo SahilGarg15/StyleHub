@@ -108,7 +108,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
             )}
           </div>
 
-          {/* Colors */}
+          {/* Colors
           <div className="flex gap-1">
             {product.colors.slice(0, 4).map((color) => (
               <div
@@ -121,7 +121,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
             {product.colors.length > 4 && (
               <span className="text-xs text-muted-foreground">+{product.colors.length - 4}</span>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>

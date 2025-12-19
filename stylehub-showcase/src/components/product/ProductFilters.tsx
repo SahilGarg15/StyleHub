@@ -36,7 +36,7 @@ export const ProductFilters = ({ filters, onFiltersChange, showCategoryFilter = 
     onFiltersChange({ ...filters, [key]: value });
   };
 
-  const toggleArrayFilter = (key: 'sizes' | 'colors' | 'brands', value: string) => {
+  const toggleArrayFilter = (key: 'sizes' | 'brands', value: string) => {
     const current = filters[key] || [];
     const updated = current.includes(value)
       ? current.filter(v => v !== value)
