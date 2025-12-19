@@ -122,7 +122,7 @@ const TrackOrder = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Total Amount</p>
-                  <p className="font-semibold">${searchedOrder.total?.toFixed(2)}</p>
+                  <p className="font-semibold">₹{searchedOrder.total?.toFixed(2)}</p>
                 </div>
               </div>
             </div>

@@ -34,15 +34,15 @@ async function placeOrderAndTrack() {
       ],
       shippingAddress: {
         name: 'AI Agent Test Customer',
-        phone: '+1-555-0123',
+        phone: '+91-98765-43210',
         street: '456 AI Street',
-        city: 'San Francisco',
-        state: 'CA',
-        zipCode: '94102',
-        country: 'USA'
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        zipCode: '400050',
+        country: 'India'
       },
       customerName: 'AI Agent Test Customer',
-      customerPhone: '+1-555-0123',
+      customerPhone: '+91-98765-43210',
       customerEmail: 'ai.test@stylehub.com',
       paymentMethod: 'cod'
     };

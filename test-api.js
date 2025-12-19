@@ -75,15 +75,15 @@ async function testPlaceOrder(product) {
     ],
     shippingAddress: {
       name: 'Test User',
-      phone: '+1234567890',
+      phone: '+91-98765-43210',
       street: '123 Test Street',
-      city: 'Test City',
-      state: 'Test State',
-      zipCode: '12345',
-      country: 'USA'
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      zipCode: '400050',
+      country: 'India'
     },
     customerName: 'Test User',
-    customerPhone: '+1234567890',
+    customerPhone: '+91-98765-43210',
     customerEmail: 'test@example.com',
     paymentMethod: 'cod'
   };

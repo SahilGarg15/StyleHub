@@ -31,13 +31,13 @@ async function testGuestCheckout() {
       ],
       shippingAddress: {
         street: '789 Guest Avenue',
-        city: 'Los Angeles',
-        state: 'CA',
-        zipCode: '90001',
-        country: 'USA'
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        zipCode: '400050',
+        country: 'India'
       },
       customerName: 'Guest Customer',
-      customerPhone: '+1-555-9999',
+      customerPhone: '+91-98765-43210',
       customerEmail: 'guest@example.com',
       paymentMethod: 'COD'
     };

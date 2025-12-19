@@ -30,8 +30,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      details: '+1 (555) 123-4567',
-      subDetails: 'Mon-Fri 9am-6pm EST',
+      details: '+91 22 1234 5678',
+      subDetails: 'Mon-Fri 9am-6pm IST',
     },
     {
       icon: Mail,
@@ -42,8 +42,8 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Address',
-      details: '123 Fashion Street, New York',
-      subDetails: 'Mumbai 400001, India',
+      details: '123 Fashion Street, Bandra West',
+      subDetails: 'Mumbai 400050, India',
     },
     {
       icon: Clock,
@@ -154,7 +154,7 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-display font-bold mb-2">Visit Our Store</h2>
               <p className="text-muted-foreground mb-6">
-                Come visit us at our flagship store in the heart of New York City.
+                Come visit us at our flagship store in the heart of Mumbai.
               </p>
             </div>
 
@@ -162,7 +162,7 @@ const Contact = () => {
             <div className="aspect-video rounded-xl overflow-hidden bg-muted">
               <iframe
                 title="Store Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709658!3d19.082502004761423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2s!4v1234567890"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
