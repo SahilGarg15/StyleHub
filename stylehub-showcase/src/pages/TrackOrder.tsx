@@ -161,7 +161,7 @@ const TrackOrder = () => {
                       <p className="text-sm text-muted-foreground">
                         {item.size && `Size: ${item.size} • `}Qty: {item.quantity}
                       </p>
-                      <p className="text-sm font-semibold mt-1">${item.price?.toFixed(2)}</p>
+                      <p className="text-sm font-semibold mt-1">₹{item.price?.toFixed(2)}</p>
                     </div>
                   </div>
                 ))}
